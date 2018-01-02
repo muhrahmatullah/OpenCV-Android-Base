@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     ImageView imageView1;
     Context context;
@@ -42,5 +43,20 @@ public class MainActivity extends AppCompatActivity {
         Bitmap btmp = Bitmap.createBitmap(dest.width(),dest.height(),Bitmap.Config.ARGB_8888);
         Utils. matToBitmap(dest,btmp);
         imageView1.setImageBitmap(btmp);
+    }
+
+    @Override
+    public void onCameraViewStarted(int width, int height) {
+
+    }
+
+    @Override
+    public void onCameraViewStopped() {
+
+    }
+
+    @Override
+    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        return null;
     }
 }

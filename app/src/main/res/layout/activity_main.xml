@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:opencv="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.rahmat.app.opencvandroid.MainActivity">
 
 
-    <Button
-        android:id="@+id/button1"
+    <org.opencv.android.JavaCameraView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:screenOrientation="portrait"
+        android:id="@+id/tutorial1_activity_java_surface_view"
+        opencv:show_fps="true"
+        opencv:camera_id="any"
+        android:layout_below="@+id/text1"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="toGray"
-        android:text="grey"
-        android:layout_below="@id/imageView1"
-        android:layout_centerHorizontal="true"/>
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="280dp"
-        android:layout_width="280dp"/>
+        android:gravity="center"
+        android:id="@+id/text1"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="#ff00ff"
+        android:background="#00ff00"
+        android:textColorHighlight="#000000"
+        android:textIsSelectable="true"
+        android:textSize="32sp"
+        />
 
 </RelativeLayout>
