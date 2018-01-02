@@ -1,9 +1,13 @@
 package com.rahmat.app.opencvandroid;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,11 +40,18 @@ import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class MainActivity extends AppCompatActivity implements
+        CameraBridgeViewBase.CvCameraViewListener2
+        , ActivityCompat.OnRequestPermissionsResultCallback{
 
     /*ImageView imageView1;
     Context context;
     Bitmap img;*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     private static final String TAG = "OCVSample::Activity";
     private int w, h;
@@ -103,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     }
 
+    private static final int REQUEST_CAMERA = 0;
+
     public MainActivity() {
 
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -120,10 +133,10 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_main);
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.tutorial1_activity_java_surface_view);
+        mOpenCvCameraView = findViewById(R.id.tutorial1_activity_java_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        tvName = (TextView) findViewById(R.id.text1);
+        tvName = findViewById(R.id.text1);
     }
 
     @Override
@@ -131,6 +144,23 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         super.onPause();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
+    }
+
+    public void showCameraView(){
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                // Permission is already available, start camera preview
+                startCamera();
+            } else {
+                Log.i(TAG,
+                        "CAMERA permission has already been granted. Displaying camera preview.");
+            }
+    }
+
+    public void startCamera(){
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+        mOpenCvCameraView.setCvCameraViewListener(this);
     }
 
     @Override
@@ -180,7 +210,11 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         // Matching
         MatOfDMatch matches = new MatOfDMatch();
         if (img1.type() == aInputFrame.type()) {
-            matcher.match(descriptors1, descriptors2, matches);
+            //matcher.match(descriptors1, descriptors2, matches);
+            //dm.match(object_desc, scene_desc, matches);
+            //if(descriptors1.type() == descriptors2.type() && descriptors1.cols() == descriptors2.cols());
+
+
         } else {
             return aInputFrame;
         }
