@@ -16,9 +16,9 @@ import org.opencv.imgproc.Imgproc;
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    ImageView imageView1;
+    /*ImageView imageView1;
     Context context;
-    Bitmap img;
+    Bitmap img;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
         System.loadLibrary("opencv_java3");
 
-        imageView1 = findViewById(R.id.imageView1);
+        /*imageView1 = findViewById(R.id.imageView1);
 
         img = BitmapFactory.decodeResource(this.getResources(),R.drawable.bg_image);
-        imageView1.setImageBitmap(img);
+        imageView1.setImageBitmap(img);*?
     }
 
-    public void toGray(View view) {
+    /*public void toGray(View view) {
 
         Mat source = new Mat();
         Utils. bitmapToMat( img, source);
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         Bitmap btmp = Bitmap.createBitmap(dest.width(),dest.height(),Bitmap.Config.ARGB_8888);
         Utils. matToBitmap(dest,btmp);
         imageView1.setImageBitmap(btmp);
-    }
+    }*/
 
     @Override
     public void onCameraViewStarted(int width, int height) {
